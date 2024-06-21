@@ -1,6 +1,21 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { Room } from './tasks/rooms/entities/room.entity';
+import { User } from './tasks/user/entities/user.entity';
+import { WorkSpace } from './tasks/work-space/entities/work-space.entity';
+import { Reservation } from './tasks/reservations/entities/reservation.entity';
+import { SessionEntity } from './tasks/sessions/entities/session.entity';
+import { RoomsController } from './tasks/rooms/rooms.controller';
+import { UserController } from './tasks/user/user.controller';
+import { WorkSpaceController } from './tasks/work-space/work-space.controller';
+import { ReservationsController } from './tasks/reservations/controllers/reservations.controller';
+import { SessionsController } from './tasks/sessions/sessions.controller';
+import { RoomsService } from './tasks/rooms/rooms.service';
+import { UserService } from './tasks/user/user.service';
+import { WorkSpaceService } from './tasks/work-space/work-space.service';
+import { ReservationsService } from './tasks/reservations/services/reservations.service';
+import { SessionsService } from './tasks/sessions/sessions.service';
 
 @Module({
   imports: [
@@ -17,16 +32,16 @@ import { ConfigModule } from '@nestjs/config';
       database: process.env.POSTGRES_DATABASE,
       autoLoadEntities: true,
       synchronize: true,
-      entities: [],
+      entities: [Room,User,WorkSpace,Reservation,SessionEntity],
       extra: {
         ssl: true,
       },
     }),
-    TypeOrmModule.forFeature([]),
+    TypeOrmModule.forFeature([Room,User,WorkSpace,Reservation,SessionEntity]),
   
   ],
 
-  controllers: [],
-  providers: [],
+  controllers: [RoomsController,UserController,WorkSpaceController,ReservationsController,SessionsController],
+  providers: [RoomsService,UserService,WorkSpaceService,ReservationsService,SessionsService],
 })
 export class AppModule {}
