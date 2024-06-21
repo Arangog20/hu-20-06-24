@@ -15,6 +15,6 @@ export class User {
   email:string;
 
   @Column()
-  phone:number;
+  phoneNumber:number;
 
 }
