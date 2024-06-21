@@ -1,8 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Reservation } from "src/tasks/reservations/entities/reservation.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({name:"userId"})
   userId:number;
 
   @Column()
@@ -16,4 +17,7 @@ export class User {
 
   @Column()
   phoneNumber:number;
+
+  @OneToMany(()=>Reservation, (reservations)=>reservations.user)
+  reservations:Reservation[] 
 }

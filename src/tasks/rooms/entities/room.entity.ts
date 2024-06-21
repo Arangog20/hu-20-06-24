@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { WorkSpace } from "src/tasks/work-space/entities/work-space.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Room {
@@ -14,4 +15,7 @@ export class Room {
     
     @Column()
     column_num: number;
+
+    @OneToMany(()=>WorkSpace, (workSpaces)=>workSpaces.rooms)
+    workSpaces: WorkSpace[];
 }
