@@ -8,14 +8,14 @@ export class WorkSpace {
     workSpaceId: number;
 
     @Column()
-    row: number;
+    positionRow: number;
 
     @Column()
-    column: number;
+    positionColumn: number;
 
-    @OneToMany(()=>Reservation, (reservations)=>reservations.workSpaces)
+    @OneToMany(()=>Reservation, (reservations)=>reservations.workSpaceId)
     reservations:Reservation[] 
 
-    @ManyToOne(()=>Room, (rooms)=>rooms.workSpaces)
-    rooms: Room;
+    @ManyToOne(()=>Room, (roomId)=>roomId.workSpaces)
+    roomId: Room;
 }

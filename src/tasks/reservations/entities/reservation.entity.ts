@@ -1,12 +1,11 @@
 import { SessionEntity } from "src/tasks/sessions/entities/session.entity";
 import { User } from "src/tasks/user/entities/user.entity";
 import { WorkSpace} from "src/tasks/work-space/entities/work-space.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 export enum Status{
     CONFIRMED = 'confirmed',
-    CANCELED = 'canceled',
-    UNCONFIRMED = 'unconfirmed'  
+    CANCELED = 'canceled', 
 }
 
 @Entity()
@@ -15,22 +14,22 @@ export class Reservation {
   @PrimaryGeneratedColumn()
   reservationId: number;
 
-  @ManyToOne(()=> User, (user) =>user.reservations)
+  @ManyToOne(()=> User, (userId) =>userId.reservations)
   @JoinColumn({name:'userId',})
-  user: User;
+  userId: User;
 
   @ManyToOne(()=> SessionEntity, (session) => session.reservation)
   @JoinColumn({name:'sessionId'})
-  sessions: SessionEntity;
+  sessionId: SessionEntity;
 
   @ManyToOne(()=> WorkSpace, (workSpaces) => workSpaces.reservations)
   @JoinColumn({name:'workSpaceId'})
-  workSpaces: WorkSpace ;
+  workSpaceId: WorkSpace ;
 
-  @Column()
+  @CreateDateColumn()
   reservationDate: Date;
 
-  @Column({default: Status.UNCONFIRMED})
+  @Column({default: Status.CONFIRMED})
   status: Status;
 }
 

@@ -5,6 +5,7 @@ import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const port = process.env.PORT || 4000;
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -29,9 +30,9 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/doc', app, document);
 
-  await app.listen(3000);
+  await app.listen(port);
 
-  console.log('Project started => localhost:3000');
+  console.log(`Project started => http://localhost:${port}/api/v1`);
   console.log('Access to the project via Swagger: localhost:3000/api/doc');
 }
 bootstrap();

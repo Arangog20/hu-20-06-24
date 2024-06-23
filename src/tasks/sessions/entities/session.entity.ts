@@ -7,7 +7,7 @@ export class SessionEntity {
     sessionId: number;
 
     @Column()
-    name: string;
+    sessionName: string;
 
     @Column({ type: 'time' })
     startTime: Date;
@@ -15,6 +15,6 @@ export class SessionEntity {
     @Column({ type: 'time' })
     endTime: Date;
 
-    @OneToMany(()=>Reservation, (reservations)=>reservations.sessions)
+    @OneToMany(()=>Reservation, (reservations)=>reservations.sessionId)
   reservation:Reservation[] 
 }

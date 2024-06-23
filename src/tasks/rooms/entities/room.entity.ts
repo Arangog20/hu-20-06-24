@@ -8,7 +8,7 @@ export class Room {
     roomId: number;
 
     @Column()
-    name: string;
+    roomName: string;
 
     @Column()
     row_num: number;
@@ -16,6 +16,6 @@ export class Room {
     @Column()
     column_num: number;
 
-    @OneToMany(()=>WorkSpace, (workSpaces)=>workSpaces.rooms)
+    @OneToMany(()=>WorkSpace, (workSpaces)=>workSpaces.roomId)
     workSpaces: WorkSpace[];
 }

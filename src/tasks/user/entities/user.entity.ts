@@ -7,7 +7,7 @@ export class User {
   userId:number;
 
   @Column()
-  name:string;
+  userName:string;
 
   @Column()
   lastName:string;
@@ -18,6 +18,6 @@ export class User {
   @Column()
   phoneNumber:number;
 
-  @OneToMany(()=>Reservation, (reservations)=>reservations.user)
+  @OneToMany(()=>Reservation, (reservations)=>reservations.userId)
   reservations:Reservation[] 
 }
