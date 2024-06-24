@@ -4,17 +4,17 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class SessionEntity {
     @PrimaryGeneratedColumn()
-    sessionId: number;
+    session_id: number;
 
     @Column()
-    sessionName: string;
+    session_name: string;
 
     @Column({ type: 'time' })
-    startTime: Date;
+    start_time: Date;
 
     @Column({ type: 'time' })
-    endTime: Date;
+    end_time: Date;
 
-    @OneToMany(()=>Reservation, (reservations)=>reservations.sessionId)
+    @OneToMany(()=>Reservation, (reservation)=>reservation.session_id)
   reservation:Reservation[] 
 }

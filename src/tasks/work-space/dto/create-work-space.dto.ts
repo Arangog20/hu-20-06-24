@@ -4,13 +4,13 @@ export class CreateWorkSpaceDto {
 
   @IsNotEmpty()
   @IsNumber()
-  workSpaceId: number;
+  workspace_Id: number;
 
   @IsNotEmpty()
   @IsNumber()
-  row: number;
+  position_row: number;
 
   @IsNotEmpty()
   @IsNumber()
-  column: number;
+  position_column: string;
 }

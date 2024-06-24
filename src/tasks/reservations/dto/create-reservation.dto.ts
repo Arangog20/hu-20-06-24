@@ -1,5 +1,5 @@
 import { IsDate, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsPositive } from "class-validator";
-import { Status } from "../entities/reservation.entity";
+import {  StatusEnum } from "../entities/reservation.entity";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateReservationDto {
@@ -42,6 +42,6 @@ export class CreateReservationDto {
   reservationDate: Date;
 
   @IsNotEmpty()
-  @IsEnum(Status)
-  status: Status;
+  @IsEnum(StatusEnum)
+  status: StatusEnum;
 }

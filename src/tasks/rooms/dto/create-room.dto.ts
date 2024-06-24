@@ -4,11 +4,11 @@ export class CreateRoomDto {
     @IsOptional()
     @IsNumber()
     @IsPositive()
-    roomId: number;
+    room_Id: number;
 
     @IsNotEmpty()
     @IsString()
-    name: string;
+    room_name: string;
 
     @IsNumber()
     @IsNotEmpty()
