@@ -5,10 +5,10 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 export class Room {
     
     @PrimaryGeneratedColumn()
-    roomId: number;
+    room_id: number;
 
     @Column()
-    roomName: string;
+    room_name: string;
 
     @Column()
     row_num: number;
@@ -16,6 +16,6 @@ export class Room {
     @Column()
     column_num: number;
 
-    @OneToMany(()=>WorkSpace, (workSpaces)=>workSpaces.roomId)
-    workSpaces: WorkSpace[];
+    @OneToMany(()=>WorkSpace, (work_space)=>work_space.room_id)
+    workspace_id: WorkSpace[];
 }

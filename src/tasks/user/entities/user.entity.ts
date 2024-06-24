@@ -1,23 +1,23 @@
 import { Reservation } from "src/tasks/reservations/entities/reservation.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class User {
-  @PrimaryGeneratedColumn({name:"userId"})
-  userId:number;
+export class Users {
+  @PrimaryGeneratedColumn({name:"user_id"})
+  user_id:number;
 
   @Column()
-  userName:string;
+  user_name:string;
 
   @Column()
-  lastName:string;
+  last_name:string;
 
   @Column()
   email:string;
 
   @Column()
-  phoneNumber:number;
+  phone_number:number;
 
-  @OneToMany(()=>Reservation, (reservations)=>reservations.userId)
+  @OneToMany(()=>Reservation, (reservations)=>reservations.user_id)
   reservations:Reservation[] 
 }

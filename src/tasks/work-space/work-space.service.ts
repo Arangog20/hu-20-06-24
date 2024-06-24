@@ -1,26 +1,62 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateWorkSpaceDto } from './dto/create-work-space.dto';
 import { UpdateWorkSpaceDto } from './dto/update-work-space.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { WorkSpace } from './entities/work-space.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class WorkSpaceService {
-  create(createWorkSpaceDto: CreateWorkSpaceDto) {
-    return 'This action adds a new workSpace';
+constructor(
+  @InjectRepository(WorkSpace)
+  private workSpaceRepository: Repository<WorkSpace>
+){}
+
+ async create(createWorkSpaceDto: CreateWorkSpaceDto): Promise<WorkSpace> {
+    const { workspace_Id ,position_row,position_column} = createWorkSpaceDto;
+
+    const newWorkSpace = new WorkSpace();
+    newWorkSpace.workspace_id = workspace_Id;
+    newWorkSpace.position_row = position_row;
+    newWorkSpace.position_column = position_column;
+
+    const createWorkSpace = await this.workSpaceRepository.save(newWorkSpace);
+
+    return createWorkSpace;
   }
 
-  findAll() {
-    return `This action returns all workSpace`;
+  async findAll() {
+    const space = await this.workSpaceRepository.find();
+    if (!space) {
+      throw new NotFoundException(`space not found`);
+    }
+    return space;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} workSpace`;
+  async findOne(workspace_id: number) {
+    const sessionId = await this.workSpaceRepository.findOne({where: {workspace_id: workspace_id}});
+    if(!sessionId){
+      throw new NotFoundException(`workspace #${workspace_id} not found`);
+    }
+    return sessionId;
   }
 
-  update(id: number, updateWorkSpaceDto: UpdateWorkSpaceDto) {
-    return `This action updates a #${id} workSpace`;
-  }
 
-  remove(id: number) {
-    return `This action removes a #${id} workSpace`;
-  }
+  async findAsingUser(workspace_id: number) {
+    const space = await this.workSpaceRepository.findOne({ where: { workspace_id }, relations: ['reservation','reservation.user_id'] });
+    if (!space) {
+      throw new NotFoundException(`space #${workspace_id} not found`);
+    }
+    return space;
+   }
+
+   async findAsingSession(workspace_id: number) {
+    const space = await this.workSpaceRepository.findOne({ where: { workspace_id }, relations: ['reservation.session_id'] });
+    if (!space) {
+      throw new NotFoundException(`space #${workspace_id} not found`);
+    }
+    return space;
+   }
+
+  
 }

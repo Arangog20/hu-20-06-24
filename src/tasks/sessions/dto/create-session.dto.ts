@@ -4,15 +4,15 @@ export class CreateSessionDto {
 
   @IsOptional()
   @IsNumber()
-  sessionId: number;
+  session_id: number;
 
   @IsString()
   @IsNotEmpty()
-  name: string;
+ session_name: string;
 
   @IsDate()
-  startTime: Date;
+  start_time: Date;
 
   @IsDate()
-  endTime: Date;
+  end_time: Date;
 }
